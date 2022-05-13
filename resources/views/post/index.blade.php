@@ -17,6 +17,10 @@
                     <p>{{$posts['beauty_description']}}</p>
                     <p>beauty_list:</p>
                     <p>{!! $posts['beauty_list'] !!}</p>
+                    <p style="display:flex;flex-direction:column">
+                        <a href="/dashboard/posts/edit/{{$posts['id']}}">edit</a>
+                        <a href="/dashboard/posts/delete/{{$posts['id']}}">delete</a>
+                    </p>
                     <table>
                         <tr>
                             <th>img</th>
@@ -28,13 +32,16 @@
                             <tr>
                                 <td><img src="{{$swiper['img_swiper']}}" alt="" style="width:320px"></td>
                                 <td>{{$swiper['swiper_order']}}</td>
-                                <td>actions</td>
+                                <td style="display:flex;flex-direction:column">
+                                    <a href="/dashboard/swiper/delete/{{$swiper['id']}}">delete</a>
+                                    <a href="/dashboard/swiper/edit/{{$swiper['id']}}">edit</a>
+                                </td>
                             </tr>
                             @endforeach
                         @endif
                         <tr>
                             <th>
-                                add new item
+                                <a href="/dashboard/swiper/add/{{$posts['id']}}">add new item</a>
                             </th>
                         </tr>
                     </table>

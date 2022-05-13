@@ -22,13 +22,17 @@
                                 <td><img src="{{$post['img_main']}}" alt="" style="width:320px"></td>
                                 <td>{{$post['title']}}</td>
                                 <td>{{ $post['beauty_description'] }}</td>
-                                <td>actions</td>
+                                <td style="display:flex;flex-direction: column;">
+                                    <a href="/dashboard/posts/{{$post['id']}}">show</a>
+                                    <a href="/dashboard/posts/edit/{{$post['id']}}">edit</a>
+                                    <a href="/dashboard/posts/delete/{{$post['id']}}">delete</a>
+                                </td>
                             </tr>
                             @endforeach
                         @endif
                         <tr>
                             <th>
-                                add new item
+                                <a href="/dashboard/posts/add">add new item</a>
                             </th>
                         </tr>
                     </table>
