@@ -10,7 +10,7 @@ class Post extends Model
 {
     use HasFactory;
     protected $table = 'posts';
-    public function swipers(){
-        return $this->hasMany(Swiper::class);
-    }
+    // public function swipers(){
+    //     return $this->hasMany(Swiper::class);
+    // }
 }

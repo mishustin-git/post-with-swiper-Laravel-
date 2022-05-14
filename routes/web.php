@@ -27,7 +27,7 @@ Route::post('/dashboard/posts/update', 'App\Http\Controllers\PostController@upda
 Route::get('/dashboard/posts/delete/{id}', 'App\Http\Controllers\PostController@destroy')->middleware(['auth']);
 Route::get('/dashboard/posts/{id?}', 'App\Http\Controllers\PostController@index')->middleware(['auth'])->name('posts');
 
-Route::get('/dashboard/swiper/add/{id}', 'App\Http\Controllers\SwiperController@create')->middleware(['auth']);
+Route::post('/dashboard/swiper/add/', 'App\Http\Controllers\SwiperController@create')->middleware(['auth']);
 Route::post('/dashboard/swiper/create', 'App\Http\Controllers\SwiperController@store')->middleware(['auth']);
 Route::get('/dashboard/swiper/delete/{id}', 'App\Http\Controllers\SwiperController@destroy')->middleware(['auth']);
 Route::get('/dashboard/swiper/edit/{id}', 'App\Http\Controllers\SwiperController@edit')->middleware(['auth']);

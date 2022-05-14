@@ -20,6 +20,11 @@ return new class extends Migration
             $table->foreign('post_id')->references('id')->on('posts');
             $table->string('img_swiper');
             $table->integer('swiper_order')->default(1);
+            // if (Schema::hasColumn('post_id','swipers'))
+            // {      
+                // $table->dropForeign('post_id');
+                // $table->dropColumn('post_id');
+            // }
         });
     }
 
