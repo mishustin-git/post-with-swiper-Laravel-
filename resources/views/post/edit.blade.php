@@ -56,7 +56,13 @@
                         @endforeach
                     @endif
                 </table>
-                <a href="/dashboard/swiper/add/{{$post['id']}}">add item</a>
+                <form method="POST" action="/dashboard/swiper/add" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="swiper_id" value="{{$post['id']}}">
+                    <input type="hidden" name="swiper_table" value="posts">
+                    <input type="submit" value="add item">
+                </form>
+                <!-- <a href="/dashboard/swiper/add/{{$post['id']}}">add item</a> -->
             </div>
         </div>
     </div>

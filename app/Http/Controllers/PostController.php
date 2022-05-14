@@ -20,7 +20,11 @@ class PostController extends Controller
             $posts = Post::find($id);
             if ($posts)
             {
-                $swipers = Swiper::where('post_id', $id)->get()->toArray();
+                // $swipers = Swiper::where('post_id', $id)->get()->toArray();
+                $swipers = Swiper::where('swiper_table','=','posts')
+                ->where('swiper_id','=',$id)
+                ->get()
+                ->toArray();
                 if ($swipers){
                     return view('post.index',['posts'=>$posts,'swipers'=>$swipers]);
                 }
@@ -62,7 +66,7 @@ class PostController extends Controller
      */
     public function store(Request $request){
         $request_arr = $request->all();
-        if ($request_arr['title'] && $request_arr['description'] && $request_arr['list']){
+        if ($request_arr['title'] && $request_arr['description'] && $request_arr['list'] && $request_arr['slug']){
             $new_post = new Post;
             // заполнение стандартных свойств
             $new_post->title = $request_arr['title'];
@@ -112,7 +116,11 @@ class PostController extends Controller
         $post = Post::find($id);
         if ($post)
         {
-            $swipers = Swiper::where('post_id',$id)->get()->toArray();
+            // $swipers = Swiper::where('post_id',$id)->get()->toArray();
+            $swipers = Swiper::where('swiper_table','=','posts')
+                ->where('swiper_id','=',$id)
+                ->get()
+                ->toArray();
             if($swipers)
             {
                 return view('post.edit',['post'=>$post,'swipers'=>$swipers]);

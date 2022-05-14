@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Swiper;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class SwiperController extends Controller
 {
@@ -24,15 +25,17 @@ class SwiperController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
-    {
-        $post = Post::find($id);
-        if ($post)
+    public function create(Request $request){
+        $request_arr = $request->all();
+        $id = $request_arr['swiper_id'];
+        $table = $request_arr['swiper_table'];
+        $DB_elem =  DB::select('select * from '.$table.' where id='.$id);
+        if ($DB_elem)
         {
-            return view('swiper.add',['post_id'=>$id]);
+            return view('swiper.add',['swiper_id'=>$id,'swiper_table'=>$table]);
         }
         else{
-            return redirect('/dashboard/posts/');
+            return redirect('/dashboard/'.$table.'/');
         }
     }
 
@@ -45,7 +48,8 @@ class SwiperController extends Controller
     public function store(Request $request){
         $request_arr = $request->all();
         $new_swiper = new Swiper();
-        $new_swiper->post_id = $request_arr['post_id'];
+        $new_swiper->swiper_id = $request_arr['swiper_id'];
+        $new_swiper->swiper_table = $request_arr['swiper_table'];
         $new_swiper->swiper_order = $request_arr['order'];
         //работа с картинками
         if ($request->hasFile('image')) {
@@ -62,7 +66,7 @@ class SwiperController extends Controller
         // заполнение столбца главной картинки
         $new_swiper->img_swiper = $fileNameToBD;
         $new_swiper->save();
-        return redirect('/dashboard/posts/'.$request_arr['post_id']);
+        return redirect('/dashboard/'.$request_arr['swiper_table'].'/edit/'.$request_arr['swiper_id']);
     }
 
     /**
@@ -88,7 +92,7 @@ class SwiperController extends Controller
             return view('swiper.edit',['swiper'=>$swiper]);
         }
         else{
-            return redirect('/dashboard/posts/');
+            return redirect('/dashboard/');
         }
     }
 
@@ -99,8 +103,7 @@ class SwiperController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
-    {
+    public function update(Request $request){
         $request_arr = $request->all();
         $int_id = intval($request_arr['id']);
         $current_swiper = Swiper::find($int_id);
@@ -131,7 +134,9 @@ class SwiperController extends Controller
             $current_swiper->img_swiper = $fileNameToBD;
         }
         $current_swiper->save();
-        return redirect('/dashboard/posts/'.$current_swiper['post_id']);
+        $table = $current_swiper['swiper_table'];
+        $id = $current_swiper['swiper_id'];
+        return redirect('/dashboard/'.$table.'/'.$id);
     }
 
     /**

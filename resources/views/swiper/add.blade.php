@@ -14,7 +14,8 @@
 
                 <form method="POST" action="/dashboard/swiper/create" style="display:flex;flex-direction:column" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" id="post_id" name="post_id" value="{{$post_id}}"><br>
+                    <input type="hidden" id="swiper_id" name="swiper_id" value="{{$swiper_id}}"><br>
+                    <input type="hidden" id="swiper_table" name="swiper_table" value="{{$swiper_table}}"><br>
                     <label for="order">order:</label><br>
                     <input type="text" id="order" name="order" value=""><br>
                     <label for="image">Img_swiper:</label><br>
