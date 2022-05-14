@@ -68,6 +68,7 @@ class PostController extends Controller
             $new_post->title = $request_arr['title'];
             $new_post->beauty_description = $request_arr['description'];
             $new_post->beauty_list = $request_arr['list'];
+            $new_post->slug = $request_arr['slug'];
             // загрузка главного изображения
             if ($request->hasFile('image')) {
                 $filenameWithExt = $request->file('image')->getClientOriginalName ();
@@ -140,6 +141,7 @@ class PostController extends Controller
         $current_post->title = $request_arr['title'];
         $current_post->beauty_description = $request_arr['description'];
         $current_post->beauty_list = $request_arr['list'];
+        $current_post->slug = $request_arr['slug'];
         // обрабатываем картинку
         if ($request_arr['remove_img'] == 1){
             // изменяем путь вместо "storage" ставим "public"

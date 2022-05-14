@@ -17,6 +17,8 @@
                     <p>{{$posts['beauty_description']}}</p>
                     <p>beauty_list:</p>
                     <p>{!! $posts['beauty_list'] !!}</p>
+                    <p>slug:</p>
+                    <p>{{ $posts['slug'] }}</p>
                     <p style="display:flex;flex-direction:column">
                         <a href="/dashboard/posts/edit/{{$posts['id']}}">edit</a>
                         <a href="/dashboard/posts/delete/{{$posts['id']}}">delete</a>

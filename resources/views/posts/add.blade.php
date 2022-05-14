@@ -20,6 +20,8 @@
                     <input type="text" id="description" name="description" value=""><br>
                     <label for="list">list:</label><br>
                     <input type="text" id="list" name="list" value=""><br>
+                    <label for="slug">slug:</label><br>
+                    <input type="text" id="slug" name="slug" value=""><br>
                     <label for="image">Img_main:</label><br>
                     <input type="file" id="image" name="image">
                     <!-- <label for="img_swiper">img_swiper:</label><br>

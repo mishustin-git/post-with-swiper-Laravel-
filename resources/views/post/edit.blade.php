@@ -27,6 +27,8 @@
                     <input type="text" id="description" name="description" value="{{$post['beauty_description']}}"><br>
                     <label for="list">list:</label><br>
                     <input type="text" id="list" name="list" value="{{$post['beauty_list']}}"><br>
+                    <label for="slug">slug:</label><br>
+                    <input type="text" id="slug" name="slug" value="{{$post['slug']}}"><br>
                     <input type="submit" value="Submit">
                 </form>
                 <table>
