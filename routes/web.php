@@ -34,4 +34,5 @@ Route::get('/dashboard/swiper/edit/{id}', 'App\Http\Controllers\SwiperController
 Route::post('/dashboard/swiper/update', 'App\Http\Controllers\SwiperController@update')->middleware(['auth']);
 
 // 
+Route::get('/dashboard/pages/{id?}', 'App\Http\Controllers\PageController@index')->name('pages');
 require __DIR__.'/auth.php';
