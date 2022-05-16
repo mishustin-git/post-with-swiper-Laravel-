@@ -186,7 +186,7 @@ class PostController extends Controller
      */
     public function destroy($id){
         $post = Post::find($id);
-        $swipers = Swiper::where('post_id',$id)->get()->toArray();
+        $swipers = Swiper::where('swiper_id',$id)->get()->toArray();
         // сначала удаляем элементы swiper
         if ($swipers)
         {

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Page;
 use App\Models\Social;
 use App\Models\Contacts;
+use Illuminate\Support\Facades\Storage;
 
 class PageController extends Controller
 {
@@ -78,7 +79,20 @@ class PageController extends Controller
      */
     public function edit($id)
     {
-        //
+        $page = Page::find($id);
+        if ($page){
+            if ($page['type']=='сontact'){
+                $socials = Social::all();
+                $contacts = Contacts::find(1);
+                return view('page.edit',['page'=>$page,'socials'=>$socials,'contacts'=>$contacts]);
+            }
+            else{
+                return view('page.edit',['page'=>$page]);
+            }
+        }
+        else{
+            return redirect('/dashboard/pages/');
+        }
     }
 
     /**
@@ -90,7 +104,70 @@ class PageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request_arr = $request->all();
+        $page = Page::find($id);
+        if ($page)
+        {
+            $page->url = $request_arr['url'];
+            $page->title = $request_arr['title'];
+            $page->name = $request_arr['name'];
+            switch ($page['type']){
+                case "main":
+                    $page->intro = $request_arr['intro'];
+                    $page->button_text = $request_arr['button_text'];
+                    $page->save();
+                    return redirect('/dashboard/pages/edit/'.$page['id']);
+                    break;
+                case "about":
+                    $page->button_text = $request_arr['button_text'];
+                    $page->text = $request_arr['text'];
+                    if ($request_arr['remove_img'] == 1){
+                        // изменяем путь вместо "storage" ставим "public"
+                        $img_url = str_replace('/storage','public',$request_arr['image_url']);
+                        // если такое изображение есть, тогда удаляем
+                        if(Storage::exists($img_url)){
+                            Storage::delete($img_url);
+                        }
+                        // Теперь загружаем картинку
+                        if ($request->hasFile('image')) {
+                            $filenameWithExt = $request->file('image')->getClientOriginalName ();
+                            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                            $extension = $request->file('image')->getClientOriginalExtension();
+                            $fileNameToStore = $filename. '_'. time().'.'.$extension;// Upload Image$path = 
+                            $request->file('image')->storeAs('public/pages', $fileNameToStore);
+                        }
+                        else {
+                            $fileNameToStore = 'noimage.jpg';
+                        }
+                        // формируем название файла для базы данных
+                        $fileNameToBD = "/storage/pages/".$fileNameToStore;
+                        // теперь записываем новую картинку
+                        $page->img = $fileNameToBD;
+                    }
+                    $page->save();
+                    return redirect('/dashboard/pages/edit/'.$page['id']);
+                    break;
+                case "portfolio":
+                    $page->save();
+                    return redirect('/dashboard/pages/edit/'.$page['id']);
+                    break;
+                case "services":
+                    $page->text = $request_arr['text'];
+                    $page->save();
+                    return redirect('/dashboard/pages/edit/'.$page['id']);
+                    break;
+                case "сontact":
+                    $page->text = $request_arr['text'];
+                    $page->save();
+                    return redirect('/dashboard/pages/edit/'.$page['id']);
+                    break;
+                default:  
+                    return redirect('/dashboard/pages/');
+            }
+        }
+        else{
+            return redirect('/dashboard/pages/');
+        }
     }
 
     /**

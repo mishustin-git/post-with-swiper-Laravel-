@@ -27,14 +27,10 @@
                                 <td>{{$page['type']}}</td>
                                 <td style="display:flex;flex-direction:column">
                                     <a href="/dashboard/pages/{{$page['id']}}">show</a>
+                                    <a href="/dashboard/pages/edit/{{$page['id']}}">edit</a>
                                 </td>
                             </tr>
                             @endforeach
-                        <tr>
-                            <th>
-                                <a href="/dashboard/posts/add">add new item</a>
-                            </th>
-                        </tr>
                     </table>
                 </div>
             </div>

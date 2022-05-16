@@ -35,4 +35,6 @@ Route::post('/dashboard/swiper/update', 'App\Http\Controllers\SwiperController@u
 
 // 
 Route::get('/dashboard/pages/{id?}', 'App\Http\Controllers\PageController@index')->name('pages');
+Route::get('/dashboard/pages/edit/{id}', 'App\Http\Controllers\PageController@edit')->name('page-edit');
+Route::post('/dashboard/pages/update/{id}', 'App\Http\Controllers\PageController@update');
 require __DIR__.'/auth.php';
