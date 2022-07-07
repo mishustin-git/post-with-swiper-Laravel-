@@ -81,7 +81,7 @@
                                 <td>{{$contacts['addr']}}</td>
                                 <td>{{$contacts['map_x']}}</td>
                                 <td>{{$contacts['map_y']}}</td>
-                                <td><a href="#">edit</a></td>
+                                <td><a href="/dashboard/contacts">edit</a></td>
                             </tr>
                         </table>
                         <p>
@@ -101,11 +101,12 @@
                                 <td>{{$social['title']}}</td>
                                 <td>{{$social['link']}}</td>
                                 <td>{{$social['icon_name']}}</td>
-                                <td><a href="#">delete</a></td>
+                                <td><a href="/dashboard/socials/delete/{{$social['id']}}">delete</a></td>
+                                <td><a href="/dashboard/socials/edit/{{$social['id']}}">edit</a></td>
                             </tr>
                             @endforeach
                         </table>
-                        <a href="#">add_social</a>
+                        <a href="/dashboard/socials/create">add_social</a>
                     @endif
                 </form>
             </div>

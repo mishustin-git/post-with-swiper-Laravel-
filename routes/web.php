@@ -37,4 +37,15 @@ Route::post('/dashboard/swiper/update', 'App\Http\Controllers\SwiperController@u
 Route::get('/dashboard/pages/{id?}', 'App\Http\Controllers\PageController@index')->name('pages');
 Route::get('/dashboard/pages/edit/{id}', 'App\Http\Controllers\PageController@edit')->name('page-edit');
 Route::post('/dashboard/pages/update/{id}', 'App\Http\Controllers\PageController@update');
+
+// Contacts can only edit and update
+Route::get('/dashboard/contacts', 'App\Http\Controllers\ContactController@edit')->name('contacts');
+Route::post('/dashboard/contacts/update', 'App\Http\Controllers\ContactController@update');
+// socials can be create/store/edit/update/delete
+Route::get('/dashboard/socials/create', 'App\Http\Controllers\SocialController@create')->middleware(['auth']);
+Route::post('/dashboard/socials/store', 'App\Http\Controllers\SocialController@store')->middleware(['auth']);
+Route::get('/dashboard/socials/edit/{id}', 'App\Http\Controllers\SocialController@edit')->middleware(['auth']);
+Route::post('/dashboard/socials/update/{id}', 'App\Http\Controllers\SocialController@update');
+Route::get('/dashboard/socials/delete/{id}', 'App\Http\Controllers\SocialController@destroy')->middleware(['auth']);
+
 require __DIR__.'/auth.php';
