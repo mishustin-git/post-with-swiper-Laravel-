@@ -90,6 +90,39 @@
                     <p>
                         <span style="color:red">actions</span>: <a href="/dashboard/pages/edit/{{$page['id']}}">edit</a>
                     </p>
+                    @if ($swipers != 0)
+                    <table>
+                        <tr>
+                            <th>
+                                img
+                            </th>
+                            <th>
+                                order
+                            </th>
+                            <th>
+                                actions
+                            </th>
+                        </tr>
+                        @if($swipers!='-1')
+                            @foreach($swipers as $swiper)
+                                <tr>
+                                    <td><img src="{{$swiper['img_swiper']}}" alt="" style="width:320px"></td>
+                                    <td>{{$swiper['swiper_order']}}</td>
+                                    <td style="display:flex;flex-direction:column">
+                                        <a href="/dashboard/swiper/delete/{{$swiper['id']}}">delete</a>
+                                        <a href="/dashboard/swiper/edit/{{$swiper['id']}}">edit</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
+                    </table>
+                    <form method="POST" action="/dashboard/swiper/add" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="swiper_id" value="{{$page['id']}}">
+                        <input type="hidden" name="swiper_table" value="pages">
+                        <input type="submit" value="add item">
+                    </form>
+                    @endif
                 </div>
             </div>
         </div>

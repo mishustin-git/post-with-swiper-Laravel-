@@ -79,12 +79,12 @@ class PostController extends Controller
                 $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
                 $extension = $request->file('image')->getClientOriginalExtension();
                 $fileNameToStore = $filename. '_'. time().'.'.$extension;// Upload Image$path = 
-                $request->file('image')->storeAs('public/swiper', $fileNameToStore);
+                $request->file('image')->storeAs('public/posts', $fileNameToStore);
             }
             else {
                 $fileNameToStore = 'noimage.jpg';
             }
-            $fileNameToBD = "/storage/swiper/".$fileNameToStore;
+            $fileNameToBD = "/storage/posts/".$fileNameToStore;
             // заполнение столбца главной картинки
             $new_post->img_main = $fileNameToBD;
             $new_post->save();
@@ -164,13 +164,13 @@ class PostController extends Controller
                 $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
                 $extension = $request->file('image')->getClientOriginalExtension();
                 $fileNameToStore = $filename. '_'. time().'.'.$extension;// Upload Image$path = 
-                $request->file('image')->storeAs('public/swiper', $fileNameToStore);
+                $request->file('image')->storeAs('public/posts', $fileNameToStore);
             }
             else {
                 $fileNameToStore = 'noimage.jpg';
             }
             // формируем название файла для базы данных
-            $fileNameToBD = "/storage/swiper/".$fileNameToStore;
+            $fileNameToBD = "/storage/posts/".$fileNameToStore;
             // теперь записываем новую картинку
             $current_post->img_main = $fileNameToBD;
         }
@@ -199,6 +199,12 @@ class PostController extends Controller
                 }
             }
             Swiper::destroy($swiper_id);
+        }
+        // сначала удалим картинку с сервера
+        $temp = Post::find($id);
+        $url_to_delete = str_replace('/storage','public',$temp['img_main']);
+        if(Storage::exists($url_to_delete)){
+            Storage::delete($url_to_delete);
         }
         // после удаляем пост
         Post::destroy($id);

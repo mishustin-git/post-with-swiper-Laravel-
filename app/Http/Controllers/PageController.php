@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Page;
 use App\Models\Social;
 use App\Models\Contacts;
+use App\Models\Swiper;
 use Illuminate\Support\Facades\Storage;
 
 class PageController extends Controller
@@ -24,13 +25,25 @@ class PageController extends Controller
         else{
             $page = Page::find($id);
             if ($page){
+                $swipers = Swiper::where('swiper_table','=','pages')
+                    ->where('swiper_id','=',$id)
+                    ->get()
+                    ->toArray();
+                if (count($swipers) == 0){
+                    $swipers = -1;
+                }
                 if ($page['type']=='сontact'){
                     $socials = Social::all();
                     $contacts = Contacts::find(1);
-                    return view('page.index',['page'=>$page,'socials'=>$socials,'contacts'=>$contacts]);
+                    return view('page.index',['page'=>$page,'socials'=>$socials,'contacts'=>$contacts,'swipers'=>0]);
                 }
                 else{
-                    return view('page.index',['page'=>$page]);
+                    if ($page['type']=='main'){
+                        return view('page.index',['page'=>$page,'swipers'=>$swipers]);
+                    }
+                    else{
+                        return view('page.index',['page'=>$page,'swipers'=>0]);
+                    }
                 }
             }
             else{
@@ -79,15 +92,29 @@ class PageController extends Controller
      */
     public function edit($id)
     {
+        // return $id;
         $page = Page::find($id);
         if ($page){
+            // ищем возможные элементы свайпера
+            $swipers = Swiper::where('swiper_table','=','pages')
+                    ->where('swiper_id','=',$id)
+                    ->get()
+                    ->toArray();
+            if (count($swipers) == 0){
+                $swipers = -1;
+            }
             if ($page['type']=='сontact'){
                 $socials = Social::all();
                 $contacts = Contacts::find(1);
-                return view('page.edit',['page'=>$page,'socials'=>$socials,'contacts'=>$contacts]);
+                return view('page.edit',['page'=>$page,'socials'=>$socials,'contacts'=>$contacts,'swipers'=>0]);
             }
             else{
-                return view('page.edit',['page'=>$page]);
+                if ($page['type']=='main'){
+                    return view('page.edit',['page'=>$page,'swipers'=>$swipers]);
+                }
+                else{
+                    return view('page.edit',['page'=>$page,'swipers'=>0]);
+                }
             }
         }
         else{
