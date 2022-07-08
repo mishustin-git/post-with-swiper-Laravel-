@@ -34,18 +34,24 @@ Route::get('/dashboard/swiper/edit/{id}', 'App\Http\Controllers\SwiperController
 Route::post('/dashboard/swiper/update', 'App\Http\Controllers\SwiperController@update')->middleware(['auth']);
 
 // 
-Route::get('/dashboard/pages/{id?}', 'App\Http\Controllers\PageController@index')->name('pages');
-Route::get('/dashboard/pages/edit/{id}', 'App\Http\Controllers\PageController@edit')->name('page-edit');
-Route::post('/dashboard/pages/update/{id}', 'App\Http\Controllers\PageController@update');
+Route::get('/dashboard/pages/{id?}', 'App\Http\Controllers\PageController@index')->middleware(['auth'])->name('pages');
+Route::get('/dashboard/pages/edit/{id}', 'App\Http\Controllers\PageController@edit')->middleware(['auth'])->name('page-edit');
+Route::post('/dashboard/pages/update/{id}', 'App\Http\Controllers\PageController@update')->middleware(['auth']);
 
 // Contacts can only edit and update
-Route::get('/dashboard/contacts', 'App\Http\Controllers\ContactController@edit')->name('contacts');
-Route::post('/dashboard/contacts/update', 'App\Http\Controllers\ContactController@update');
+Route::get('/dashboard/contacts', 'App\Http\Controllers\ContactController@edit')->middleware(['auth'])->name('contacts');
+Route::post('/dashboard/contacts/update', 'App\Http\Controllers\ContactController@update')->middleware(['auth']);
 // socials can be create/store/edit/update/delete
 Route::get('/dashboard/socials/create', 'App\Http\Controllers\SocialController@create')->middleware(['auth']);
 Route::post('/dashboard/socials/store', 'App\Http\Controllers\SocialController@store')->middleware(['auth']);
 Route::get('/dashboard/socials/edit/{id}', 'App\Http\Controllers\SocialController@edit')->middleware(['auth']);
 Route::post('/dashboard/socials/update/{id}', 'App\Http\Controllers\SocialController@update');
 Route::get('/dashboard/socials/delete/{id}', 'App\Http\Controllers\SocialController@destroy')->middleware(['auth']);
-
+// services
+Route::get('/dashboard/services','App\Http\Controllers\ServiceController@index')->middleware(['auth'])->name("services");
+Route::get('/dashboard/services/create','App\Http\Controllers\ServiceController@create')->middleware(['auth']);
+Route::post('/dashboard/services/store','App\Http\Controllers\ServiceController@store')->middleware(['auth']);
+Route::get('/dashboard/services/edit/{id}', 'App\Http\Controllers\ServiceController@edit')->middleware(['auth']);
+Route::post('dashboard/services/update','App\Http\Controllers\ServiceController@update')->middleware(['auth']);
+Route::get('/dashboard/services/destroy/{id}','App\Http\Controllers\ServiceController@destroy')->middleware(['auth']);
 require __DIR__.'/auth.php';
