@@ -1,0 +1,14 @@
+{
+    "en.name":"Name",
+    "ru.name":"Имя",
+    "en.required":"This field is required",
+    "ru.required":"Это поле необходимо заполнить",
+    "en.phone":"Phone",
+    "ru.phone":"Телефон",
+    "en.mail":"E-mail",
+    "ru.mail":"Почта",
+    "en.message":"Message",
+    "ru.message":"Сообщение",
+    "en.send_message":"Send Message",
+    "ru.send_message":"Отправить Сообщение"
+}

@@ -29,41 +29,41 @@
                             <div class="row more-tablet">
                                 <div class="col">
                                     <div class="form-group">
-                                        <label for="name">Name</label>
+                                        <label for="name">{{ __($lang.'.name') }}</label>
                                         <input type="text" name="name">
-                                        <span class="validation-error">The text field is required</span>
+                                        <span class="validation-error">{{ __($lang.'.required') }}</span>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
-                                        <label for="phone">Phone</label>
+                                        <label for="phone">{{ __($lang.'.phone') }}</label>
                                         <input type="tel" name="phone">
-                                        <span class="validation-error">The telephone field is required</span>
+                                        <span class="validation-error">{{ __($lang.'.required') }}</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
-                                        <label for="email">E-mail</label>
+                                        <label for="email">{{ __($lang.'.mail') }}</label>
                                         <input type="email" name="email">
-                                        <span class="validation-error">The email field is required</span>
+                                        <span class="validation-error">{{ __($lang.'.required') }}</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
-                                        <label for="message">Message</label>
+                                        <label for="message">{{ __($lang.'.message') }}</label>
                                         <textarea name="message" id="" cols="30" rows="10"></textarea>
-                                        <span class="validation-error">The text field is required</span>
+                                        <span class="validation-error">{{ __($lang.'.required') }}</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col contact__form-button">
                                     <button class="btn primary">
-                                        Send Message
+                                        {{ __($lang.'.message') }}
                                     </button>
                                 </div>
                             </div>

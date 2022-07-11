@@ -36,7 +36,8 @@ class FrontController extends Controller
                 return view($view, ['main'=>$page,'pages'=>$pages,'contacts'=>$contacts,'socials'=>$socials,'home'=>$home,'services'=>$services]);
             }
             else{
-                return view($view, ['main'=>$page,'pages'=>$pages,'contacts'=>$contacts,'socials'=>$socials,'home'=>$home]);
+                $lang = 'ru';
+                return view($view, ['main'=>$page,'pages'=>$pages,'contacts'=>$contacts,'socials'=>$socials,'home'=>$home,'lang'=>$lang]);
             }
         }
         else{
