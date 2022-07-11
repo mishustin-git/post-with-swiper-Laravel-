@@ -1,3 +1,3 @@
 <p>
-    contacts template
+    contact template
 </p>

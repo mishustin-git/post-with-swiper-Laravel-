@@ -22,17 +22,18 @@ class FrontController extends Controller
     }
     public function another($slug){
         $slug = "/".$slug;
-        $page = Page::where(['url'=>$slug])->first();
-        // $pages = Page::all();
-        // return $slug;
+        $page = Page::where(['url'=>$slug])->firstOrFail();
+        $home = Page::where(['type'=>'main'])->first();
+        $pages = Page::all();
+        $contacts = Contacts::first();
+        $socials = Social::all();
         $view = 'front.'.$page['type'];
+        $temp = View::exists($view);
         if (View::exists($view)){
-            return 'render';
+            return view($view, ['main'=>$page,'pages'=>$pages,'contacts'=>$contacts,'socials'=>$socials,'home'=>$home]);
         }
         else{
-            return 'no view';
+            abort(404);
         }
-        
-        // return $view;
     }
 }
