@@ -154,11 +154,14 @@ class SwiperController extends Controller
                 Storage::delete($url_to_delete);
             };
             Swiper::destroy($id);
-            return redirect('/dashboard/posts/'.$curent_swiper['post_id']);
+            $table = $curent_swiper['swiper_table'];
+            $id = $curent_swiper['swiper_id'];
+            return redirect('/dashboard/'.$table.'/'.$id);
+            // return redirect('/dashboard/posts/'.$curent_swiper['post_id']);
         }
         else
         {
-            return redirect('/dashboard/posts/');
+            return redirect('/dashboard/');
         }
     }
 }

@@ -12,14 +12,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('main');
+// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
-
+require __DIR__.'/auth.php';
 Route::get('/dashboard/posts/add', 'App\Http\Controllers\PostController@create')->middleware(['auth'])->name('posts/add');
 Route::post('/dashboard/posts/create', 'App\Http\Controllers\PostController@store')->middleware(['auth']);
 Route::get('/dashboard/posts/edit/{id}', 'App\Http\Controllers\PostController@edit')->middleware(['auth'])->name('posts/edit');
@@ -54,4 +54,7 @@ Route::post('/dashboard/services/store','App\Http\Controllers\ServiceController@
 Route::get('/dashboard/services/edit/{id}', 'App\Http\Controllers\ServiceController@edit')->middleware(['auth']);
 Route::post('dashboard/services/update','App\Http\Controllers\ServiceController@update')->middleware(['auth']);
 Route::get('/dashboard/services/destroy/{id}','App\Http\Controllers\ServiceController@destroy')->middleware(['auth']);
-require __DIR__.'/auth.php';
+
+
+Route::get('/','App\Http\Controllers\FrontController@main');
+Route::get('/{slug}','App\Http\Controllers\FrontController@another');
