@@ -7,6 +7,7 @@ use App\Models\Page;
 use App\Models\Swiper;
 use App\Models\Contacts;
 use App\Models\Social;
+use App\Models\Services;
 use Illuminate\Support\Facades\View;
 
 class FrontController extends Controller
@@ -30,7 +31,13 @@ class FrontController extends Controller
         $view = 'front.'.$page['type'];
         $temp = View::exists($view);
         if (View::exists($view)){
-            return view($view, ['main'=>$page,'pages'=>$pages,'contacts'=>$contacts,'socials'=>$socials,'home'=>$home]);
+            if ($page['type'] == 'services'){
+                $services = Services::all();
+                return view($view, ['main'=>$page,'pages'=>$pages,'contacts'=>$contacts,'socials'=>$socials,'home'=>$home,'services'=>$services]);
+            }
+            else{
+                return view($view, ['main'=>$page,'pages'=>$pages,'contacts'=>$contacts,'socials'=>$socials,'home'=>$home]);
+            }
         }
         else{
             abort(404);
