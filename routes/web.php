@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AjaxContactController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,6 +56,8 @@ Route::get('/dashboard/services/edit/{id}', 'App\Http\Controllers\ServiceControl
 Route::post('dashboard/services/update','App\Http\Controllers\ServiceController@update')->middleware(['auth']);
 Route::get('/dashboard/services/destroy/{id}','App\Http\Controllers\ServiceController@destroy')->middleware(['auth']);
 
+Route::get('/ajax-form', [AjaxContactController::class, 'index']);
+Route::post('store-data', [AjaxContactController::class, 'store']);
 
 Route::get('/','App\Http\Controllers\FrontController@main');
 Route::get('/{slug}','App\Http\Controllers\FrontController@another');

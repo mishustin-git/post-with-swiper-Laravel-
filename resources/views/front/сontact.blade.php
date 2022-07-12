@@ -25,8 +25,9 @@
             <div class="contact">
                 <div class="contact__wrap">
                     <div class="contact__form">
-                        <form action="">
+                        <form name="contactUsForm" id="contactUsForm" method="post" action="javascript:void(0)">
                             <div class="row more-tablet">
+                                @csrf
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="name">{{ __($lang.'.name') }}</label>
@@ -60,14 +61,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col contact__form-button">
-                                    <button class="btn primary">
-                                        {{ __($lang.'.message') }}
-                                    </button>
+                                <div class="row">
+                                    <div class="col contact__form-button">
+                                        <button class="btn primary">
+                                            {{ __($lang.'.message') }}
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form> 
+                        </form>
                     </div>
                     <div class="contact__info">
                         <a href="#" class="contact__info-addr"><i class="fa-solid fa-location-dot"></i> {{$contacts['addr']}}</a>
@@ -105,6 +106,65 @@
 <script src="assets/js/app.js" defer></script>
 <script src="https://kit.fontawesome.com/2c1fe779ee.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+{{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> --}}
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+<script>
+    if ($("#contactUsForm").length > 0) {
+        $("#contactUsForm").validate({
+            // rules: {
+            //     name: {
+            //         required: true,
+            //         maxlength: 50
+            //     },
+            //     email: {
+            //         required: true,
+            //         maxlength: 50,
+            //         email: true,
+            //     },  
+            //     message: {
+            //         required: true,
+            //         maxlength: 300
+            //     },   
+            // },
+            // messages: {
+            //     name: {
+            //         required: "Please enter name",
+            //         maxlength: "Your name maxlength should be 50 characters long."
+            //     },
+            //     email: {
+            //         required: "Please enter valid email",
+            //         email: "Please enter valid email",
+            //         maxlength: "The email name should less than or equal to 50 characters",
+            //     },   
+            //     message: {
+            //         required: "Please enter message",
+            //         maxlength: "Your message name maxlength should be 300 characters long."
+            //     },
+            // },
+            submitHandler: function(form) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+            $('#submit').html('Please Wait...');
+            $("#submit"). attr("disabled", true);
+            $.ajax({
+                url: "{{url('store-data')}}",
+                type: "POST",
+                data: $('#contactUsForm').serialize(),
+                success: function( response ) {
+                    $('#submit').html('Submit');
+                    $("#submit"). attr("disabled", false);
+                    alert('Ajax form has been submitted successfully');
+                document.getElementById("contactUsForm").reset(); 
+                }
+            });
+        }
+        })
+    }
+    </script>
 </body>
 
 </html>

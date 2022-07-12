@@ -36,12 +36,15 @@ class FrontController extends Controller
                 return view($view, ['main'=>$page,'pages'=>$pages,'contacts'=>$contacts,'socials'=>$socials,'home'=>$home,'services'=>$services]);
             }
             else{
-                $lang = 'ru';
+                $lang = 'en';
                 return view($view, ['main'=>$page,'pages'=>$pages,'contacts'=>$contacts,'socials'=>$socials,'home'=>$home,'lang'=>$lang]);
             }
         }
         else{
             abort(404);
         }
+    }
+    public function getForm(){
+        return "get form data";
     }
 }
