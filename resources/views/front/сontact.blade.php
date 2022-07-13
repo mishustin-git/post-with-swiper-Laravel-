@@ -143,13 +143,14 @@
             //     },
             // },
             submitHandler: function(form) {
+                console.log("click");
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
             $('#submit').html('Please Wait...');
-            $("#submit"). attr("disabled", true);
+            $("#submit").attr("disabled", true);
             $.ajax({
                 url: "{{url('store-data')}}",
                 type: "POST",
