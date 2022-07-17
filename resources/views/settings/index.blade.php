@@ -11,9 +11,9 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <table class="table">
                         <tr>
-                            <th>title</th>
-                            <th>description</th>
-                            <th>actions</th>
+                            <th>Название</th>
+                            <th>Содержание</th>
+                            <th>Действия</th>
                         </tr>
                         @if ($data != '-1')
                             @foreach ($data as $item)
@@ -33,8 +33,8 @@
                             @endforeach
                         @endif
                         <tr>
-                            <th style="display:none">
-                                <a href="{{route('settings.create')}}">add new item</a>
+                            <th style="">
+                                <a href="{{route('settings.create')}}" class="btn btn-primary">Добавить</a>
                                 {{-- Скроем возможность пользователям добавлять свойства, только для нас --}}
                             </th>
                         </tr>

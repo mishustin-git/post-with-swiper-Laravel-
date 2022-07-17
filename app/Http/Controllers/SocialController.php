@@ -20,7 +20,9 @@ class SocialController extends Controller
         return redirect('/dashboard/pages/edit/5');
     }
     public function edit($id){
-        $social = Social::find($id);
+        $social = Social::findOrFail($id);
+        // $social = Social::All();
+        // return $social;
         return view('socials.edit',['social'=>$social]);
     }
     public function update(Request $request, $id){

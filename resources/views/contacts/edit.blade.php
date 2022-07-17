@@ -1,43 +1,26 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            contacts/edit
+            Редактирование контактов:
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    contacts/edit
-                </div>
-
                 <form method="POST" action="/dashboard/contacts/update" style="display:flex;flex-direction:column">
                     @csrf
-                        <p>
-                            <span style="color:red">Contacts:</span>
-                        </p>
-                        <p>
-                            <span style="color:red">mail</span> : 
-                            <input type="text" name="mail" value="{{$contacts['mail']}}">
-                        </p>
-                        <p>
-                            <span style="color:red">phone</span> : 
-                            <input type="text" name="phone" value="{{$contacts['phone']}}">
-                        </p>
-                        <p>
-                            <span style="color:red">addr</span> : 
-                            <input type="text" name="addr" value="{{$contacts['addr']}}">
-                        </p>
-                        <p>
-                            <span style="color:red">map_x</span> : 
-                            <input type="text" name="map_x" value="{{$contacts['map_x']}}">
-                        </p>
-                        <p>
-                            <span style="color:red">map_y</span> : 
-                            <input type="text" name="map_y" value="{{$contacts['map_y']}}">
-                        </p>
-                        <input type="submit" value="Submit">
+                    <label for="mail">Почта:</label><br>
+                    <input type="text" id="mail" name="mail" value="{{$contacts['mail']}}"><br>
+                    <label for="phone">Телефон:</label><br>
+                    <input type="text" id="phone" name="phone" value="{{$contacts['phone']}}"><br>
+                    <label for="addr">Адресс:</label><br>
+                    <input type="text" id="addr" name="addr" value="{{$contacts['addr']}}"><br>
+                    <label for="map_x">Координата X на карте:</label><br>
+                    <input type="text" id="map_x" name="map_x" value="{{$contacts['map_x']}}"><br>
+                    <label for="map_x">Координата Y на карте:</label><br>
+                    <input type="text" id="map_y" name="map_y" value="{{$contacts['map_y']}}"><br>
+                    <input type="submit" class="btn btn-success" value="Обновить" style="display: block; width:175px; margin:0 auto; margin-bottom:25px;margin-top:15px;">
                 </form>
             </div>
         </div>

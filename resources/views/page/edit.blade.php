@@ -123,8 +123,8 @@
                                         <td>{{$social['link']}}</td>
                                         <td>{{$social['icon_name']}}</td>
                                         <td>
-                                            <a href="/dashboard/socials/edit/5" style="margin-right: 15px"><i class="fa-solid fa-pen"></i></a>
-                                            <a href="/dashboard/socials/delete/5"><i class="fa-solid fa-trash-can"></i></a>
+                                            <a href="/dashboard/socials/edit/{{$social['id']}}" style="margin-right: 15px"><i class="fa-solid fa-pen"></i></a>
+                                            <a href="/dashboard/socials/delete/{{$social['id']}}"><i class="fa-solid fa-trash-can"></i></a>
                                         </td>
                                     </tr>
                                     @php

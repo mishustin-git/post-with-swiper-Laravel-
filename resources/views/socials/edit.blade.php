@@ -1,35 +1,23 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            social/edit
+            Редактирование социальной сети - {{$social['title']}}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    social/edit
-                </div>
 
                 <form method="POST" action="/dashboard/socials/update/{{$social['id']}}" style="display:flex;flex-direction:column" enctype="multipart/form-data">
                     @csrf
-                    <p>
-                        <span style="color:red">Socials:</span>
-                    </p>
-                    <p>
-                        <span style="color:red">title</span> : 
-                        <input type="text" name="title" value="{{$social['title']}}">
-                    </p>
-                    <p>
-                        <span style="color:red">link</span> : 
-                        <input type="text" name="link" value="{{$social['link']}}">
-                    </p>
-                    <p>
-                        <span style="color:red">icon_name</span> : 
-                        <input type="text" name="icon_name" value="{{$social['icon_name']}}">
-                    </p>
-                    <input type="submit" value="Submit">
+                    <label for="title">Название:</label><br>
+                    <input type="text" id="title" name="title" value="{{$social['title']}}"><br>
+                    <label for="link">Ссылка:</label><br>
+                    <input type="text" id="link" name="link" value="{{$social['link']}}"><br>
+                    <label for="icon_name">Font Awesome Icon</label><br>
+                    <input type="text" id="icon_name" name="icon_name" value="{{$social['icon_name']}}"><br>
+                    <input type="submit" class="btn btn-success" value="Обновить" style="display: block; width:175px; margin:0 auto; margin-bottom:25px;margin-top:15px;">
                 </form>
             </div>
         </div>

@@ -12,11 +12,11 @@
                     @csrf
                     @method('PATCH')
                     <div class="mb-3">
-                        <label for="title" class="form-label">title:</label>
+                        <label for="title" class="form-label">Название:</label>
                         <input type="text" class="form-control" id="title" name="title" value="{{$data['title']}}">
                     </div>
                     <div class="mb-3">
-                        <label for="info" class="form-label">info:</label>
+                        <label for="info" class="form-label">Содержание:</label>
                         <input type="text" class="form-control" id="info" name="info" value="{{$data['info']}}">
                     </div>
                     <input type="submit" value="Обновить" class="btn btn-lg btn-success" style="display: block; width:175px; margin:0 auto; margin-bottom:25px;margin-top:15px;">
