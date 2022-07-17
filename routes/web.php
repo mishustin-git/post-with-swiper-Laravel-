@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AjaxContactController;
+use App\Http\Controllers\SettingsCRUDController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,6 +56,8 @@ Route::post('/dashboard/services/store','App\Http\Controllers\ServiceController@
 Route::get('/dashboard/services/edit/{id}', 'App\Http\Controllers\ServiceController@edit')->middleware(['auth']);
 Route::post('dashboard/services/update','App\Http\Controllers\ServiceController@update')->middleware(['auth']);
 Route::get('/dashboard/services/destroy/{id}','App\Http\Controllers\ServiceController@destroy')->middleware(['auth']);
+
+Route::resource('/dashboard/settings', SettingsCRUDController::class);
 
 Route::get('/ajax-form', [AjaxContactController::class, 'index']);
 Route::post('store-data', [AjaxContactController::class, 'store']);
